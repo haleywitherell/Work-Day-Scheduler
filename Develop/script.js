@@ -20,39 +20,40 @@ var scheduleEvents = [
 // Today's Date 
 $("#currentDay").text(date);
 
+// Create rows loop
 for(i=0; i< scheduleEvents.length; i++) {
     var newRow = $("<div>").attr("class", "row")
-
     var newP = $("<p>").attr("class", "col-2").text(scheduleEvents[i].time)
+    var newIndex = $("<index>").attr("class", "col", "past").text(scheduleEvents[i])
+    var newButton = $("<button>").attr("class", "col-2")
 
     newRow.append(newP)
+    newRow.append(newIndex)
+    newRow.append(newButton)
     //newRow.append(inputTagCreatedByAHumanBeing)
 
     $(".container").append(newRow)
 }
 
-// Create rows
+// // Create rows
 
-scheduleEvents.forEach(function(timeBlock, index) {
- var timeLabel = timeBlock.time;
- var blockColor = colorRow(timeLabel);
- var row =
-     '<div class="time-block" id="' +
-     index +
-     '"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
-     timeLabel +
-     '</div><textarea class="form-control ' +
-     blockColor +
-     '">' +
-     timeBlock.event +
-     '</textarea><div class="col-sm col-lg-1 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="fas fa-save"></i></button></div></div></div>';
-
- /* Adding rows to container div */
- $(".container").append(row);
-});
+// scheduleEvents.forEach(function(timeBlock, index) {
+//  var timeLabel = timeBlock.time;
+//  var blockColor = colorRow(timeLabel);
+//  var row =
+//      '<div class="time-block" id="' +
+//      index +
+//      '"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
+//      timeLabel +
+//      '</div><textarea class="form-control ' +
+//      blockColor +
+//      '">' +
+//      timeBlock.event +
+//      '</textarea><div class="col-sm col-lg-1 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="fas fa-save"></i></button></div></div></div>';
 
 
-// /* Color rows based on current time */
+
+// Row Color Conditional 
 function colorRow(time) {
  var planNow = moment(rightNow, "H A");
  var planEntry = moment(time, "H A");
@@ -65,7 +66,7 @@ function colorRow(time) {
  }
 }
 
-/* Save Events */
+// Save Button
 $(".saveBtn").on("click", function() {
  var blockID = parseInt(
      $(this)
