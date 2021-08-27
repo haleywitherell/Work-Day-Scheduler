@@ -1,8 +1,8 @@
-// Date/time Variables 
+// Set date/time variables 
 var date = moment().format("dddd, MMMM Do");
 var rightNow = moment().format("H A");
 
-// Calendar per Hour Variable
+// Calendar per hour variable
 var scheduleEvents = [
     { time: "8 AM", event: "" },
     { time: "9 AM", event: "" },
@@ -17,76 +17,62 @@ var scheduleEvents = [
     { time: "6 PM", event: "" },
 ];
 
+
 // Today's Date 
 $("#currentDay").text(date);
 
+
 // Create rows loop
 for(i=0; i< scheduleEvents.length; i++) {
-    var newRow = $("<div>").attr("class", "row")
-    var newP = $("<p>").attr("class", "col-2").text(scheduleEvents[i].time)
-    var newIndex = $("<index>").attr("class", "col", "past").text(scheduleEvents[i])
-    var newButton = $("<button>").attr("class", "col-2")
+    var newRow = $("<div>").attr("class", "row").addClass("row");
+    var newP = $("<p>").attr("class", "col-2").addClass("hour").text(scheduleEvents[i].time);
+    var newInput = $("<input>").attr("class", "col").addClass("timeBlock").text(scheduleEvents[i].event);
+    var newButton = $("<button>").attr("class", "col-2").addClass("saveBtn");
 
     newRow.append(newP)
-    newRow.append(newIndex)
+    newRow.append(newInput)
     newRow.append(newButton)
-    //newRow.append(inputTagCreatedByAHumanBeing)
 
     $(".container").append(newRow)
 }
 
-// // Create rows
 
-// scheduleEvents.forEach(function(timeBlock, index) {
-//  var timeLabel = timeBlock.time;
-//  var blockColor = colorRow(timeLabel);
-//  var row =
-//      '<div class="time-block" id="' +
-//      index +
-//      '"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
-//      timeLabel +
-//      '</div><textarea class="form-control ' +
-//      blockColor +
-//      '">' +
-//      timeBlock.event +
-//      '</textarea><div class="col-sm col-lg-1 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="fas fa-save"></i></button></div></div></div>';
+// // Row Color If Statement 
+function setRowColors(time) {
 
-
-
-// Row Color Conditional 
-function colorRow(time) {
  var planNow = moment(rightNow, "H A");
  var planEntry = moment(time, "H A");
+
  if (planNow.isBefore(planEntry) === true) {
-     return "future";
+     return ".future";
  } else if (planNow.isAfter(planEntry) === true) {
-     return "past";
+     return ".past";
  } else {
-     return "present";
+     return ".present";
  }
 }
 
-// Save Button
-$(".saveBtn").on("click", function() {
- var blockID = parseInt(
-     $(this)
-         .closest(".time-block")
-         .attr("id")
- );
- var userEntry = $.trim(
-     $(this)
-         .parent()
-         .siblings("textarea")
-         .val()
- );
- scheduleEvents[blockID].event = userEntry;
 
- /* Set local storage */
- localStorage.setItem("workDay", JSON.stringify(scheduleEvents));
-});
+// // Save Button
+// $(".saveBtn").on("click", function() {
+//  var blockID = parseInt(
+//      $(this).closest(".time-block").attr("id")
+//  );
+//  var userEntry = $.trim(
+//      $(this).parent().siblings("textarea").val()
+//  );
+//  scheduleEvents[blockID].event = userEntry;
 
-// /* Local Storage check */
-var workEvents = JSON.parse(localStorage.getItem("workDay"));
-if (workEvents) {
-    scheduleEvents = workEvents;
-}
+
+
+//  // Storage 
+
+// var newEvents = JSON.parse(localStorage.getItem("workDay"));
+// if (newEvents) {
+//     scheduleEvents = newEvents;
+// }
+
+// // Local Storage 
+//  localStorage.setItem("workDay", JSON.stringify(scheduleEvents));
+// });
+
