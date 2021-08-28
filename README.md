@@ -18,4 +18,5 @@ The following animation demonstrates the application functionality:
 - I used JS to save comments to the local storage so they dont go away when refreshing the page. 
 
 ## Deployed Link
+https://haleywitherell.github.io/Work-Day-Scheduler/
 
