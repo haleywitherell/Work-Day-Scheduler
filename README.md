@@ -3,7 +3,7 @@
 # Mock up
 The following animation demonstrates the application functionality:
 
-![Walk through of the application.](./Assets/Work-Day=Scheduler.gif)
+![Walk through of the application.](./Assets/Work-Day-Scheduler.gif)
 
 
 ## HTML and CSS
