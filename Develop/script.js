@@ -1,28 +1,26 @@
 // Set date/time variables 
-var date = moment().format("dddd, MMMM Do");
-var rightNow = moment().format("H A");
+var date = moment().format("dddd, MMMM Do, YYYY");
+var rightNow = moment().format("HH");
 
 // Today's Date 
 $("#currentDay").text(date);
 
 // Calendar per hour variable
 var scheduleEvents = [
-    { time: "8 AM", event: "" },
-    { time: "9 AM", event: "" },
-    { time: "10 AM", event: "" },
-    { time: "11 AM", event: "" },
-    { time: "12 PM", event: "" },
-    { time: "1 PM", event: "" },
-    { time: "2 PM", event: "" },
-    { time: "3 PM", event: "" },
-    { time: "4 PM", event: "" },
-    { time: "5 PM", event: "" },
-    { time: "6 PM", event: "" },
+    { hour: 9, time: "09 AM", event: "" },
+    { hour: 10, time: "10 AM", event: "" },
+    { hour: 11, time: "11 AM", event: "" },
+    { hour: 12, time: "12 PM", event: "" },
+    { hour: 13, time: "1 PM", event: "" },
+    { hour: 14, time: "2 PM", event: "" },
+    { hour: 15, time: "3 PM", event: "" },
+    { hour: 16, time: "4 PM", event: "" },
+    { hour: 17, time: "5 PM", event: "" },
 ];
 
 // Create rows loop
 for(i=0; i< scheduleEvents.length; i++) {
-    var newRow = $("<div>").attr("class", "row").addClass("row");
+    var newRow = $("<div>").addClass("row");
     var newP = $("<p>").attr("class", "col-2").addClass("hour").text(scheduleEvents[i].time);
     var newInput = $("<input>").attr("class", "col").addClass("timeBlock").text(scheduleEvents[i].event);
     var newButton = $("<button>").attr("class", "col-2").addClass("saveBtn");
@@ -31,23 +29,29 @@ for(i=0; i< scheduleEvents.length; i++) {
     newRow.append(newInput)
     newRow.append(newButton)
 
+    var colorClass = getColorClass(scheduleEvents[i].hour)
+    newInput.addClass(colorClass)
+
     $(".container").append(newRow)
 }
 
+getColorClass()
 
 // // Row Color If Statement 
-// function changeColor(time) {  
+function getColorClass(hour) {  
+var currentHour = moment().hour()
+console.log(currentHour)
+var hourDiff = currentHour - hour
+ if (hourDiff === 0) {
+     return ".present";
 
-//  if () {
-//      return ".present";
+ } else if (hourDiff > 0 ) {
+     return ".past";
 
-//  } else if () {
-//      return ".past";
-
-//  } else {
-//      return ".future";
-//  }
-// }
+ } else {
+     return ".future";
+ }
+}
 
 
 // Save Button
